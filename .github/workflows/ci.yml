@@ -43,11 +43,6 @@ jobs:
           pwd
           ls -R
 
-      - 
-        name: Change directory for JAR file before Docker build
-        run: |
-          cd gradle-project
-          
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -67,6 +62,7 @@ jobs:
         name: Build and Push
         uses: docker/build-push-action@v6
         with:
+          context: "{{defaultContext}}:gradle-project"
           push: true
           tags: percharch/only-one:latest
 
