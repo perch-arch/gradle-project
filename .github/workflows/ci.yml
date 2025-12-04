@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    name: Setup Gradle
+    name: Setup Gradle + Compiled Code
     runs-on: ubuntu-latest
 
     steps:
@@ -44,7 +44,27 @@ jobs:
           pwd
           ls -R
 
-      -
+  test:
+    name: Sonarqube Scan
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: Checkout Code for Sonarqube Scan
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - 
+        name: Sonar Scan
+        uses: SonarSource/sonarqube-scan-action@v6.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          
+  docker:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      - 
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -67,22 +87,6 @@ jobs:
           push: true
           tags: percharch/only-one:latest
 
-  test:
-    name: Env Setup + sonarqube scan
-    runs-on: ubuntu-latest
-    steps:
-      - 
-        name: Checkout Code for Sonarqube Scan
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - 
-        name: Sonarqube Scan
-        uses: SonarSource/sonarqube-scan-action@v6.0.0
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_ORG: ${{vars.SONAR_ORG}}
-          SONAR_PROJECT_KEY: ${{vars.SONAR_PROJECTKEY}}
 
 
