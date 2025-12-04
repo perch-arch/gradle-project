@@ -64,8 +64,8 @@ jobs:
       - 
         name: Move build + sonar properties folder to repo root
         run: |
-          cp ./gradle-project/build/classes/java/main/com/example/App.class /home/runner/work/gradle-project
-          cp ./gradle-project/sonar-project-properties ./
+          cp home/runner/work/gradle-project/gradle-project/build/classes/java/main/com/example/App.class /home/runner/work/gradle-project
+          cp home/runner/work/gradle-project/gradle-project/sonar-project-properties ./
 
       - 
         name: Sonar Scan
