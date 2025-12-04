@@ -62,8 +62,14 @@ jobs:
           fetch-depth: 0
 
       - 
+        name: Move build + sonar properties folder to repo root
+        run: |
+          cp gradle-project/build/classes/java/main/com/example/App.class /home/runner/work/gradle-project
+          cp gradle-project/sonar-project-properties ./
+
+      - 
         name: Sonar Scan
-        run: ./gradlew sonar
+        uses: SonarSource/sonarqube-scan-action@v6.0.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       
