@@ -91,8 +91,7 @@ jobs:
         name: Build and Push
         uses: docker/build-push-action@v6
         with:
-          context: ./gradle-project/gradle-project
-          file: ./gradle-project/gradle-project/Dockerfile
+          context: .
           push: true
           tags: percharch/only-one:App-Java-latest
 
