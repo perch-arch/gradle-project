@@ -1,13 +1,14 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Java CI with Gradle
+name: Java Project Scan
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, update-workflow ]
   pull_request:
     branches: [ master ]
+    types: [opened,synchronize,reopened]
 
 jobs:
   build:
@@ -65,4 +66,21 @@ jobs:
           context: .
           push: true
           tags: percharch/only-one:latest
+
+  test:
+    name: Env Setup + sonarqube scan
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: Checkout Code for Sonarqube Scan
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - 
+        name: Sonarqube Scan
+        uses: SonarSource/sonarqube-scan-action@v6.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
 
