@@ -32,7 +32,7 @@ jobs:
 
       - 
         name: Build with Gradle
-        run: ./gradlew build --scan
+        run: ./gradlew build
 
       - 
         name: Build Classes with Gradle
