@@ -95,11 +95,17 @@ jobs:
         name: Print PATH
         run: echo $PATH
 
+      -
+        name: Validate build Config.
+        uses: docker/build-push-action@v6
+        with:
+          call: check
+
       - 
         name: Build and Push
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: "{{defaultContext}}:gradle-project"
           push: true
           tags: percharch/only-one:App-Java-latest
 
