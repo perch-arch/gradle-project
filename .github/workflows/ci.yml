@@ -38,6 +38,13 @@ jobs:
         name: Build Classes with Gradle
         run: ./gradlew classes
 
+      -
+        name: Upload JAR
+        uses: actions/upload-artifact@v3
+        with:
+          name: java-app-jar
+          path: build/libs/java-app-1.0-SNAPSHOT.jar
+
       - 
         name: Show JAR + Classes output and path
         run: |
@@ -106,6 +113,13 @@ jobs:
         with:
           call: check
 
+      -
+        name: Download JAR file from Build jobs
+        uses: actions/download-artifact@v3
+        with:
+          name: java-app-jar
+          path: build/libs
+          
       - 
         name: Build and Push
         uses: docker/build-push-action@v6
