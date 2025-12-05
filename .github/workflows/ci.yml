@@ -73,8 +73,8 @@ jobs:
     needs: test
     steps:
       - 
-        run: |
-          pwd
+        name: Print PATH
+        run: echo $PATH
 
       - 
         name: Set up QEMU
@@ -91,11 +91,15 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      -
+        name: Print PATH
+        run: echo $PATH
+
       - 
         name: Build and Push
         uses: docker/build-push-action@v6
         with:
-          context: ./gradle-project
+          context: 
           build-contexts: 
             name=.
           push: true
