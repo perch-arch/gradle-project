@@ -73,6 +73,10 @@ jobs:
     needs: test
     steps:
       - 
+        run: |
+          pwd
+
+      - 
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -86,6 +90,9 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      -name 
+
 
       - 
         name: Build and Push
