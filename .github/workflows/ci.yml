@@ -91,9 +91,6 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      -name 
-
-
       - 
         name: Build and Push
         uses: docker/build-push-action@v6
